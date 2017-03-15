@@ -1,8 +1,12 @@
-IMAGE_NAME=rcarmo/node-red:armhf
+IMAGE_NAME=rcarmo/node-red
 DATA_FOLDER?=/srv/node-red/data
 HOSTNAME?=node-red
-build: Dockerfile
-	docker build -t $(IMAGE_NAME) .
+TAG?=jessie-armhf
+alpine: alpine/Dockerfile
+	docker build -t $(IMAGE_NAME):alpine-armhf alpine
+
+jessie: jessie/Dockerfile
+	docker build -t $(IMAGE_NAME):jessie-armhf jessie
 
 push:
 	docker push $(IMAGE_NAME)
@@ -16,17 +20,17 @@ network:
 	lan
 
 shell:
-	docker run --net=lan -h $(HOSTNAME) -it $(IMAGE_NAME) /bin/sh
+	docker run --net=lan -h $(HOSTNAME) -it $(IMAGE_NAME):$(TAG) /bin/sh
 
 test: network
 	-mkdir -p $(DATA_FOLDER)
 	docker run -v $(DATA_FOLDER):/home/user/.node-red \
-		--net=lan -h $(HOSTNAME) $(IMAGE_NAME)
+		--net=lan -h $(HOSTNAME) $(IMAGE_NAME):$(TAG)
 
 daemon: network
 	-mkdir -p $(DATA_FOLDER)
 	docker run -v $(DATA_FOLDER):/home/user/.node-red \
-		--net=lan -h $(HOSTNAME) -d --restart unless-stopped $(IMAGE_NAME)
+		--net=lan -h $(HOSTNAME) -d --restart unless-stopped $(IMAGE_NAME):$(TAG)
 
 clean:
 	-docker rm -v $$(docker ps -a -q -f status=exited)

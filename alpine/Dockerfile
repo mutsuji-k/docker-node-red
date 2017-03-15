@@ -4,7 +4,8 @@ MAINTAINER https://github.com/rcarmo
 RUN apk update \
  && apk upgrade \
  && apk add --no-cache \
-    musl \
+    musl-dev \
+    libc-dev \
     build-base \
     ca-certificates \
     supervisor \
@@ -14,23 +15,23 @@ RUN apk update \
 
 RUN npm install --loglevel verbose -g \
       node-red \
-      node-red-contrib-inotify \
       node-red-node-daemon \
+      node-red-contrib-inotify \
       node-red-contrib-cron \
       # Logic
-      node-red-node-random \
-      node-red-node-smooth \
       node-red-node-base64 \
       node-red-node-geohash \
+      node-red-node-random \
+      node-red-node-smooth \
       node-red-node-suncalc \
-      node-red-contrib-msg-resend \
-      node-red-contrib-kalman \
-      node-red-contrib-yield \
       node-red-contrib-flow-dispatcher \
+      node-red-contrib-kalman \
+      node-red-contrib-msg-resend \
+      node-red-contrib-roster \
+      node-red-contrib-yield \
  && rm -rf /root/.npm
       
 RUN npm install --loglevel verbose -g \
-      node-red-contrib-roster \
       # Services
       node-red-contrib-ifttt \
       node-red-node-feedparser \
@@ -46,27 +47,29 @@ RUN npm install --loglevel verbose -g \
       node-red-contrib-shorturl \
       node-red-contrib-wit-ai \
       node-red-contrib-cognitive-services \
+      node-red-contrib-chatbot \
       node-red-node-wordpos \
-      node-red-node-badwords \
       # Web
+      node-red-node-exif \
       node-red-contrib-httpauth \
       node-red-contrib-https \
       node-red-contrib-get-feeds \
       node-red-contrib-rss \
       node-red-contrib-gzip \
-      node-red-node-exif \
       node-red-contrib-markdown \
  && rm -rf /root/.npm
 
 RUN npm install -g \
       # Dashboards
       node-red-contrib-web-worldmap \
-      node-red-dashboard \
+      node-red-contrib-graphs \
       node-red-contrib-metrics \
+      node-red-dashboard \
       # Networking
       node-red-node-wol \
       node-red-node-ping \
       node-red-contrib-advanced-ping \
+      node-red-contrib-homekit \
       node-red-contrib-n2n \
       node-red-contrib-zmq \
       node-red-node-msgpack \
@@ -83,8 +86,11 @@ RUN npm install -g \
       node-red-contrib-azure-documentdb \
       node-red-node-mongodb \
       node-red-contrib-postgres \
+      node-red-node-sqlite \
  && rm -rf /root/.npm
 
+
+RUN npm install 
 # Modules we can't install in Alpine 3.5 armhf just yet
 #RUN npm install --loglevel verbose -g \
       #bcrypt \
@@ -94,7 +100,6 @@ RUN npm install -g \
       #node-red-contrib-alexa \
       #node-red-contrib-camerapi \
       #node-red-contrib-pdf \
-      #node-red-contrib-graphs \
       #node-red-node-discovery \
       #node-red-node-sqlite
 
