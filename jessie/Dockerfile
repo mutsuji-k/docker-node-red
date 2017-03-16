@@ -7,6 +7,7 @@ RUN apt-get update && apt-get dist-upgrade -y && apt-get install \
     libavahi-compat-libdnssd-dev \
     libsqlite3-dev \
     libzmq-dev \
+    python2.7 \
     python2.7-dev \
     wget \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -30,7 +31,6 @@ RUN npm install -g \
       node-red-contrib-cron \
       # Hardware
       node-red-contrib-gpio \
-      raspi-io \
       node-red-contrib-camerapi \
       # Logic
       node-red-node-base64 \
