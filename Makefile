@@ -7,7 +7,8 @@ alpine: alpine/Dockerfile
 	docker build -t $(IMAGE_NAME):alpine-armhf alpine
 
 alpine.x86_64: alpine.x86_64/Dockerfile
-	docker build -t $(IMAGE_NAME):local_build alpine.x86_64
+	docker build -t $(IMAGE_NAME):alpine alpine.x86_64
+	docker tag $(IMAGE_NAME):alpine $(IMAGE_NAME):latest
 
 jessie: jessie/Dockerfile
 	docker build -t $(IMAGE_NAME):jessie-armhf jessie
