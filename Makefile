@@ -1,9 +1,13 @@
 IMAGE_NAME=rcarmo/node-red
 DATA_FOLDER?=/srv/node-red/data
+MODULES_FOLDER=node_modules
 HOSTNAME?=node-red
 TAG?=jessie-armhf
 alpine: alpine/Dockerfile
 	docker build -t $(IMAGE_NAME):alpine-armhf alpine
+
+alpine.x86_64: alpine.x86_64/Dockerfile
+	docker build -t $(IMAGE_NAME):local_build alpine.x86_64
 
 jessie: jessie/Dockerfile
 	docker build -t $(IMAGE_NAME):jessie-armhf jessie
