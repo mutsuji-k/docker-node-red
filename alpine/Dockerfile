@@ -9,12 +9,13 @@ RUN apk update \
     ca-certificates \
     supervisor \
     nodejs \
+    nodejs-npm \
+    avahi-compat-libdns_sd \
  && apk add --no-cache --virtual .build-deps \
     musl-dev \
     libc-dev \
     build-base \
     nodejs-dev \
-    nodejs-npm \
     avahi-dev \
     sqlite-dev \
     zeromq-dev \
