@@ -2,7 +2,7 @@ IMAGE_NAME=rcarmo/node-red
 DATA_FOLDER?=/srv/node-red/data
 MODULES_FOLDER=node_modules
 HOSTNAME?=node-red
-TAG?=jessie-armhf
+TAG?=alpine-armhf
 alpine: alpine/Dockerfile
 	docker build -t $(IMAGE_NAME):alpine-armhf alpine
 
@@ -27,10 +27,10 @@ network:
 shell:
 	docker run --net=lan -h $(HOSTNAME) -it $(IMAGE_NAME):$(TAG) /bin/sh
 
-test: network
+test: 
 	-mkdir -p $(DATA_FOLDER)
 	docker run -v $(DATA_FOLDER):/home/user/.node-red \
-		--net=lan -h $(HOSTNAME) $(IMAGE_NAME):$(TAG)
+		--net=host -h $(HOSTNAME) $(IMAGE_NAME):$(TAG)
 
 daemon: network
 	-mkdir -p $(DATA_FOLDER)
@@ -39,4 +39,5 @@ daemon: network
 
 clean:
 	-docker rm -v $$(docker ps -a -q -f status=exited)
-	-docker rmi $$(docker images -q -f dangling=true)-docker rmi $(IMAGE_NAME)
+	-docker rmi $$(docker images -q -f dangling=true)
+	-docker rmi $(IMAGE_NAME)
