@@ -1,4 +1,4 @@
-FROM rcarmo/alpine:3.5-armhf
+FROM rcarmo/alpine:3.6-armhf
 MAINTAINER https://github.com/rcarmo
 
 RUN apk update \
@@ -11,6 +11,8 @@ RUN apk update \
     supervisor \
     nodejs \
     nodejs-dev \
+    nodejs-npm \
+    avahi-dev \
     zeromq-dev 
 
 RUN npm install --loglevel verbose -g \
@@ -40,6 +42,7 @@ RUN npm install --loglevel verbose -g \
       node-red-contrib-twitter-text \
       node-red-contrib-twitter-stream \
       node-red-contrib-push \
+      node-red-contrib-azure-iot-hub \
       node-red-contrib-slack \
       node-red-node-pushbullet \
       node-red-node-google \
@@ -82,7 +85,6 @@ RUN npm install -g \
       node-red-contrib-elasticsearchcdb \
       node-red-contrib-azure-blob-storage \
       node-red-contrib-azure-table-storage \
-      node-red-contrib-azure-iot-hub \
       node-red-contrib-azure-documentdb \
       node-red-node-mongodb \
       node-red-contrib-postgres \
