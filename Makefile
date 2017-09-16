@@ -1,8 +1,8 @@
 IMAGE_NAME=rcarmo/node-red
 DATA_FOLDER?=/srv/node-red/data
-MODULES_FOLDER=node_modules
 HOSTNAME?=node-red
-TAG?=alpine-armhf
+BASE?=alpine
+TAG?=$(BASE)-armhf
 alpine: alpine/Dockerfile
 	docker build -t $(IMAGE_NAME):alpine-armhf alpine
 
