@@ -5,23 +5,28 @@ MAINTAINER Rui Carmo https://github.com/rcarmo
 #RUN apt-get update \
 # && apt-get dist-upgrade -y \
 # && i
-RUN apt-get update \
+RUN DEBIAN_FRONTEND=noninteractive \
+ && apt-get update \
  && apt-get install \
     apt-transport-https \
+    apt-utils \
     build-essential \
     curl \
     git \
     libavahi-compat-libdnssd-dev \
     wget \
-    -y --force-yes  \
+    -y \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
+
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 
-RUN apt-get install \
+
+RUN DEBIAN_FRONTEND=noninteractive \
+ && apt-get install \
     nodejs \
-    -y --force-yes \
+    -y \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -29,7 +34,7 @@ RUN apt-get install \
 RUN adduser --disabled-password --gecos "" -u 1001 user
 USER user
 RUN npm config set prefix=/home/user/.npm-packages \
- && echo -e '\nexport PATH="/home/user/.npm-packages/bin:$PATH"' >> /home/user/.bashrc \
+ && echo -e '\nexport PATH="/home/user/.npm-packages/bin:$PATH"\nNPM_PACKAGES="/home/user/.npm-packages"' >> /home/user/.bashrc \
  && npm install -g --build-from-source \
     node-red \
     node-red-node-daemon \
@@ -49,6 +54,7 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-contrib-shorturl \
     node-red-contrib-httpauth \
     node-red-contrib-https \
+    node-red-contrib-dns \
     node-red-contrib-rss \
     node-red-contrib-gzip \
     node-red-contrib-markdown \
@@ -57,6 +63,7 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-node-wol \
     node-red-node-ping \
     node-red-contrib-advanced-ping \
+    node-red-contrib-google-home-notify \
     node-red-contrib-chromecast \
     node-red-contrib-homekit \
     node-red-contrib-n2n \
