@@ -6,8 +6,8 @@ export ARCH=armhf
 else
 export BASE=ubuntu:16.04
 endif
-export HOSTNAME?=homebridge
-export DATA_FOLDER=$(HOME)/.homebridge
+export HOSTNAME?=node-red
+export DATA_FOLDER=$(HOME)/.node-red
 export VCS_REF=`git rev-parse --short HEAD`
 export VCS_URL=https://github.com/rcarmo/docker-node-red
 export BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
@@ -35,14 +35,14 @@ shell:
 	docker run --net=lan -h $(HOSTNAME) -it $(IMAGE_NAME):$(ARCH) /bin/sh
 
 test: 
-	docker run -v $(DATA_FOLDER):/home/user/.homebridge \
-		--net=host -h $(HOSTNAME) $(IMAGE_NAME):$(ARCH)
+	docker run -v $(DATA_FOLDER):/home/user/.node-red \
+		--net=host --name $(HOSTNAME) $(IMAGE_NAME):$(ARCH)
 
 daemon: 
 	-mkdir -p $(DATA_FOLDER)
 	docker run -v $(DATA_FOLDER):/home/user/.homebridge \
 		-v /var/run/dbus:/var/run/dbus \
-		--net=host -n $(HOSTNAME) -d --restart unless-stopped $(IMAGE_NAME):$(ARCH)
+		--net=host --name $(HOSTNAME) -d --restart unless-stopped $(IMAGE_NAME):$(ARCH)
 
 clean:
 	-docker rm -v $$(docker ps -a -q -f status=exited)
