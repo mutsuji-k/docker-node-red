@@ -23,14 +23,6 @@ build: Dockerfile
 push:
 	docker push $(IMAGE_NAME)
 
-network:
-	-docker network create -d macvlan \
-	--subnet=192.168.1.0/24 \
-        --gateway=192.168.1.254 \
-	--ip-range=192.168.1.128/25 \
-	-o parent=eth0 \
-	lan
-
 shell:
 	docker run --net=lan -h $(HOSTNAME) -it $(IMAGE_NAME):$(ARCH) /bin/sh
 
@@ -40,7 +32,7 @@ test:
 
 daemon: 
 	-mkdir -p $(DATA_FOLDER)
-	docker run -v $(DATA_FOLDER):/home/user/.homebridge \
+	docker run -v $(DATA_FOLDER):/home/user/.node-red \
 		-v /var/run/dbus:/var/run/dbus \
 		--net=host --name $(HOSTNAME) -d --restart unless-stopped $(IMAGE_NAME):$(ARCH)
 
