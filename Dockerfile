@@ -48,6 +48,7 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-contrib-msg-resend \
     node-red-contrib-roster \
     node-red-contrib-yield \
+    node-red-contrib-join \
     node-red-node-feedparser \
     node-red-node-twilio \
     node-red-contrib-cognitive-services \
