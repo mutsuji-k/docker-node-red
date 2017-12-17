@@ -46,9 +46,11 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-node-suncalc \
     node-red-contrib-kalman \
     node-red-contrib-msg-resend \
+    node-red-contrib-meobox \
     node-red-contrib-roster \
     node-red-contrib-yield \
     node-red-contrib-join \
+    node-red-contrib-throttle \
     node-red-node-feedparser \
     node-red-node-twilio \
     node-red-contrib-cognitive-services \
