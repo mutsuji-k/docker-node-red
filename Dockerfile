@@ -46,13 +46,14 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-node-suncalc \
     node-red-contrib-kalman \
     node-red-contrib-msg-resend \
-    node-red-contrib-meobox \
     node-red-contrib-roster \
     node-red-contrib-yield \
     node-red-contrib-join \
+    node-red-contrib-persist \
     node-red-contrib-throttle \
     node-red-node-feedparser \
     node-red-node-twilio \
+    node-red-contrib-broadlink \
     node-red-contrib-cognitive-services \
     node-red-contrib-shorturl \
     node-red-contrib-httpauth \
@@ -80,7 +81,7 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-node-redis \
     node-red-node-mongodb \
     node-red-node-sqlite \
-    node-red-contrib-broadlink  
+    nr-regexp-filter 
 
 VOLUME /home/user/.node-red
 CMD /home/user/.npm-packages/bin/node-red
