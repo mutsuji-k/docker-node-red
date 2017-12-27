@@ -44,6 +44,7 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-node-random \
     node-red-node-smooth \
     node-red-node-suncalc \
+    node-red-contrib-deduplicate \
     node-red-contrib-kalman \
     node-red-contrib-msg-resend \
     node-red-contrib-roster \
