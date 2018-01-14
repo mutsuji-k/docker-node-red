@@ -13,6 +13,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     build-essential \
     curl \
     git \
+    iputils-ping \
     libavahi-compat-libdnssd-dev \
     wget \
     -y \
