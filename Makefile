@@ -1,11 +1,15 @@
-export IMAGE_NAME=rcarmo/node-red
 export ARCH?=$(shell arch)
-ifneq (,$(findstring arm,$(ARCH)))
-export BASE=armv7/armhf-ubuntu:16.04
-export ARCH=armhf
+ifneq (,$(findstring armv6,$(ARCH)))
+export BASE=arm32v6/ubuntu:18.04
+export ARCH=arm32v6
+else ifneq (,$(findstring armv7,$(ARCH)))
+export BASE=arm32v7/ubuntu:18.04
+export ARCH=arm32v7
 else
-export BASE=ubuntu:16.04
+export BASE=ubuntu:18.04
+export ARCH=amd64
 endif
+export IMAGE_NAME=rcarmo/node-red
 export HOSTNAME?=node-red
 export DATA_FOLDER=$(HOME)/.node-red
 export VCS_REF=`git rev-parse --short HEAD`
@@ -29,6 +33,12 @@ shell:
 test: 
 	docker run -v $(DATA_FOLDER):/home/user/.node-red \
 		--net=host --name $(HOSTNAME) $(IMAGE_NAME):$(ARCH)
+
+update:
+	-docker pull $(IMAGE_NAME):$(ARCH)
+	-docker stop $(HOSTNAME)
+	-docker rm $(HOSTNAME)
+	make daemon
 
 daemon: 
 	-mkdir -p $(DATA_FOLDER)
