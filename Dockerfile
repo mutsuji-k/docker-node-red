@@ -72,6 +72,7 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-contrib-google-home-notify \
     node-red-contrib-chromecast \
     node-red-contrib-homekit \
+    node-red-contrib-home-assistant \
     node-red-contrib-n2n \
     node-red-contrib-zmq \
     node-red-node-msgpack \
