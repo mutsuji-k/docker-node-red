@@ -56,7 +56,6 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-node-feedparser \
     node-red-node-twilio \
     node-red-contrib-broadlink \
-    node-red-contrib-cognitive-services \
     node-red-contrib-shorturl \
     node-red-contrib-httpauth \
     node-red-contrib-https \
@@ -70,8 +69,15 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-node-ping \
     node-red-contrib-advanced-ping \
     node-red-contrib-google-home-notify \
+    node-red-contrib-lgtv \
     node-red-contrib-chromecast \
-    node-red-contrib-homekit \
+    node-red-contrib-azure-iot-hub \
+    node-red-contrib-azure-blob-storage \
+    node-red-contrib-azure-table-storage \
+    node-red-contrib-cognitive-services \
+    node-red-contrib-apple-tv \
+    node-red-contrib-alexa-local \
+    node-red-contrib-homekit-bridged \
     node-red-contrib-home-assistant \
     node-red-contrib-n2n \
     node-red-contrib-zmq \
