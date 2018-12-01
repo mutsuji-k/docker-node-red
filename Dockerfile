@@ -75,7 +75,6 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-contrib-azure-blob-storage \
     node-red-contrib-azure-table-storage \
     node-red-contrib-cognitive-services \
-    node-red-contrib-apple-tv \
     node-red-contrib-alexa-local \
     node-red-contrib-homekit-bridged \
     node-red-contrib-home-assistant \
