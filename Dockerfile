@@ -41,6 +41,7 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-node-daemon \
     node-red-contrib-inotify \
     node-red-contrib-cron \
+    node-red-contrib-moment \
     node-red-node-base64 \
     node-red-node-random \
     node-red-node-smooth \
