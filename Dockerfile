@@ -38,8 +38,10 @@ RUN npm config set prefix=/home/user/.npm-packages \
  && echo -e '\nexport PATH="/home/user/.npm-packages/bin:$PATH"\nNPM_PACKAGES="/home/user/.npm-packages"' >> /home/user/.bashrc \
  && npm install -g --build-from-source \
     node-red \
+    node-red-admin \
     node-red-node-daemon \
     node-red-contrib-inotify \
+    node-red-contrib-dsm \
     node-red-contrib-cron \
     node-red-contrib-moment \
     node-red-node-base64 \
