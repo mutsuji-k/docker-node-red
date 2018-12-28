@@ -17,9 +17,6 @@ export VCS_URL=https://github.com/rcarmo/docker-node-red
 export BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
 export TAG_DATE=`date -u +"%Y%m%d"`
 
-tag:
-	docker tag $(IMAGE_NAME):$(ARCH) $(IMAGE_NAME):$(ARCH)-$(TAG_DATE)
-
 build: Dockerfile
 	docker build --build-arg BUILD_DATE=$(BUILD_DATE) \
 		--build-arg VCS_REF=$(VCS_REF) \
@@ -27,6 +24,9 @@ build: Dockerfile
 		--build-arg ARCH=$(ARCH) \
 		--build-arg BASE=$(BASE) \
 		-t $(IMAGE_NAME):$(ARCH) .
+
+tag:
+	docker tag $(IMAGE_NAME):$(ARCH) $(IMAGE_NAME):$(ARCH)-$(TAG_DATE)
 
 push:
 	docker push $(IMAGE_NAME)
