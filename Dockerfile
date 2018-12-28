@@ -11,6 +11,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     apt-transport-https \
     apt-utils \
     build-essential \
+    certbot \
     curl \
     git \
     iputils-ping \
@@ -70,6 +71,7 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-node-exif \
     node-red-node-wol \
     node-red-node-ping \
+    node-red-node-prowl \
     node-red-contrib-advanced-ping \
     node-red-contrib-google-home-notify \
     node-red-contrib-lgtv \
