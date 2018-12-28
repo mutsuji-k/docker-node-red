@@ -5,13 +5,12 @@ MAINTAINER Rui Carmo https://github.com/rcarmo
 #RUN apt-get update \
 # && apt-get dist-upgrade -y \
 # && i
-RUN DEBIAN_FRONTEND=noninteractive \
- && apt-get update \
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update \
  && apt-get install \
     apt-transport-https \
     apt-utils \
     build-essential \
-    certbot \
     curl \
     git \
     iputils-ping \
@@ -59,6 +58,10 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-contrib-throttle \
     node-red-node-feedparser \
     node-red-node-twilio \
+    node-red-node-twitter \
+    node-red-node-pushbullet \
+    node-red-node-irc \
+    node-red-node-prowl \
     node-red-contrib-broadlink \
     node-red-contrib-shorturl \
     node-red-contrib-httpauth \
@@ -71,7 +74,6 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-node-exif \
     node-red-node-wol \
     node-red-node-ping \
-    node-red-node-prowl \
     node-red-contrib-advanced-ping \
     node-red-contrib-google-home-notify \
     node-red-contrib-lgtv \
