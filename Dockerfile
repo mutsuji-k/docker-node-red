@@ -2,11 +2,10 @@ ARG BASE
 FROM ${BASE}
 MAINTAINER Rui Carmo https://github.com/rcarmo
 
-#RUN apt-get update \
-# && apt-get dist-upgrade -y \
-# && i
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
+ && apt-get dist-upgrade -y \
+ && apt-get autoremove -y \
  && apt-get install \
     apt-transport-https \
     apt-utils \
@@ -20,14 +19,12 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
  && apt-get install \
     nodejs \
     -y \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
-
 
 RUN adduser --disabled-password --gecos "" -u 1001 user
 USER user
