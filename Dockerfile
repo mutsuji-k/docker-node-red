@@ -21,10 +21,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
-
-
-RUN DEBIAN_FRONTEND=noninteractive \
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
  && apt-get install \
     nodejs \
     -y \
@@ -44,6 +41,8 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-contrib-dsm \
     node-red-contrib-cron \
     node-red-contrib-moment \
+    node-red-contrib-exit \
+    node-red-contrib-startup-trigger \
     node-red-node-base64 \
     node-red-node-random \
     node-red-node-smooth \
