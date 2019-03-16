@@ -79,6 +79,7 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-contrib-azure-table-storage \
     node-red-contrib-cognitive-services \
     node-red-contrib-alexa-local \
+    node-red-contrib-wemo-emulator \ 
     node-red-contrib-homekit-bridged \
     node-red-contrib-home-assistant \
     node-red-contrib-n2n \
