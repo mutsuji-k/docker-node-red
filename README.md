@@ -13,6 +13,7 @@ It contains a number of modules for interacting with cloud services but (for now
 - [ ] move to proper Docker manifest/arch tagging
 - [ ] Optional image with LetsEncrypt support via `certbot` modeled on [`docker-letsencrypt`][dle]
 - [ ] move to something like `s6init` to allow for pre-flight container setup
+- [ ] multi-step build to decrease image size
 - [x] added `node-red-admin` for easier auth setup
 
 [nr]: http://nodered.org
