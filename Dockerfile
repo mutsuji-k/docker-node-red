@@ -34,6 +34,8 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red \
     node-red-admin \
     node-red-node-daemon \
+    node-red-contrib-gc \
+    node-red-contrib-msg-speed \
     node-red-contrib-inotify \
     node-red-contrib-dsm \
     node-red-contrib-cron \
