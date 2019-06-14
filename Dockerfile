@@ -83,7 +83,7 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-contrib-alexa-local \
     node-red-contrib-wemo-emulator \ 
     node-red-contrib-homekit-bridged \
-    node-red-contrib-homebridge-automation \
+    https://github.com/NorthernMan54/node-red-contrib-homebridge-automation \
     node-red-contrib-n2n \
     node-red-contrib-zmq \
     node-red-node-msgpack \
