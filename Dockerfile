@@ -19,7 +19,7 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
  && apt-get install \
     nodejs \
     -y \
@@ -83,7 +83,7 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-contrib-alexa-local \
     node-red-contrib-wemo-emulator \ 
     node-red-contrib-homekit-bridged \
-    node-red-contrib-home-assistant \
+    node-red-contrib-homebridge-automation \
     node-red-contrib-n2n \
     node-red-contrib-zmq \
     node-red-node-msgpack \
