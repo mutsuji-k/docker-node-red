@@ -14,6 +14,7 @@ RUN apt-get update \
     git \
     iputils-ping \
     libavahi-compat-libdnssd-dev \
+    tzdata \
     wget \
     -y \
  && apt-get clean \
