@@ -99,7 +99,8 @@ RUN npm config set prefix=/home/user/.npm-packages \
     nr-regexp-filter 
 
 VOLUME /home/user/.node-red
-CMD /home/user/.npm-packages/bin/node-red
+ADD ubuntu/init.sh /init
+CMD /init
 
 ARG VCS_REF
 ARG VCS_URL
