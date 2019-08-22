@@ -1,43 +1,57 @@
-IMAGE_NAME=rcarmo/node-red
-DATA_FOLDER?=/srv/node-red/data
-HOSTNAME?=node-red
-BASE?=alpine
-TAG?=$(BASE)-armhf
-alpine: alpine/Dockerfile
-	docker build -t $(IMAGE_NAME):alpine-armhf alpine
+export ARCH?=$(shell arch)
+ifneq (,$(findstring armv6,$(ARCH)))
+export BASE=arm32v6/ubuntu:18.04
+export ARCH=arm32v6
+else ifneq (,$(findstring armv7,$(ARCH)))
+export BASE=arm32v7/ubuntu:18.04
+export ARCH=arm32v7
+else
+export BASE=ubuntu:18.04
+export ARCH=amd64
+endif
+export IMAGE_NAME=rcarmo/node-red
+export HOSTNAME?=node-red
+export DATA_FOLDER=$(HOME)/.node-red
+export VCS_REF=`git rev-parse --short HEAD`
+export VCS_URL=https://github.com/rcarmo/docker-node-red
+export BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+export TAG_DATE=`date -u +"%Y%m%d"`
 
-alpine.x86_64: alpine.x86_64/Dockerfile
-	docker build -t $(IMAGE_NAME):alpine alpine.x86_64
-	docker tag $(IMAGE_NAME):alpine $(IMAGE_NAME):latest
+build: Dockerfile
+	docker build --build-arg BUILD_DATE=$(BUILD_DATE) \
+		--build-arg VCS_REF=$(VCS_REF) \
+		--build-arg VCS_URL=$(VCS_URL) \
+		--build-arg ARCH=$(ARCH) \
+		--build-arg BASE=$(BASE) \
+		-t $(IMAGE_NAME):$(ARCH) .
 
-jessie: jessie/Dockerfile
-	docker build -t $(IMAGE_NAME):jessie-armhf jessie
+tag:
+	docker tag $(IMAGE_NAME):$(ARCH) $(IMAGE_NAME):$(ARCH)-$(TAG_DATE)
 
 push:
 	docker push $(IMAGE_NAME)
-
-network:
-	-docker network create -d macvlan \
-	--subnet=192.168.1.0/24 \
-        --gateway=192.168.1.254 \
-	--ip-range=192.168.1.128/25 \
-	-o parent=eth0 \
-	lan
+	docker push $(IMAGE_NAME):$(ARCH)-$(TAG_DATE)
 
 shell:
-	docker run --net=lan -h $(HOSTNAME) -it $(IMAGE_NAME):$(TAG) /bin/sh
+	docker run --net=lan -h $(HOSTNAME) -it $(IMAGE_NAME):$(ARCH) /bin/sh
 
 test: 
-	-mkdir -p $(DATA_FOLDER)
 	docker run -v $(DATA_FOLDER):/home/user/.node-red \
-		--net=host -h $(HOSTNAME) $(IMAGE_NAME):$(TAG)
+		--net=host --name $(HOSTNAME) $(IMAGE_NAME):$(ARCH)
 
-daemon: network
+update:
+	-docker pull $(IMAGE_NAME):$(ARCH)
+	-docker stop $(HOSTNAME)
+	-docker rm $(HOSTNAME)
+	make daemon
+
+daemon: 
 	-mkdir -p $(DATA_FOLDER)
 	docker run -v $(DATA_FOLDER):/home/user/.node-red \
-		--net=lan -h $(HOSTNAME) -d --restart unless-stopped $(IMAGE_NAME):$(TAG)
+		-v /var/run/dbus:/var/run/dbus \
+		--net=host --name $(HOSTNAME) -d --restart unless-stopped $(IMAGE_NAME):$(ARCH)
 
 clean:
 	-docker rm -v $$(docker ps -a -q -f status=exited)
 	-docker rmi $$(docker images -q -f dangling=true)
-	-docker rmi $(IMAGE_NAME)
+	-docker rmi $$(docker images --format '{{.Repository}}:{{.Tag}}' | grep '$(IMAGE_NAME)')
