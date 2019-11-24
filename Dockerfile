@@ -84,7 +84,7 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-contrib-alexa-local \
     node-red-contrib-wemo-emulator \ 
     node-red-contrib-homekit-bridged \
-    https://github.com/NorthernMan54/node-red-contrib-homebridge-automation \
+    node-red-contrib-homebridge-automation \
     node-red-contrib-n2n \
     node-red-contrib-zmq \
     node-red-node-msgpack \
@@ -96,6 +96,7 @@ RUN npm config set prefix=/home/user/.npm-packages \
     node-red-node-redis \
     node-red-node-mongodb \
     node-red-node-sqlite \
+    node-red-node-ui-table \
     nr-regexp-filter 
 
 VOLUME /home/user/.node-red

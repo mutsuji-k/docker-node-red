@@ -1,6 +1,6 @@
 # docker-node-red-armhf
 
-A Linux container to run Node-RED on ARM devices
+A Linux container to run Node-RED on ARM devices, currently based on Ubuntu.
 
 ## About
 
